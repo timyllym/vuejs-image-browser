@@ -3,10 +3,17 @@
 </template>
 
 <script>
+  import { mapGetters, mapActions } from 'vuex'
+
   export default {
-    props: [
-    ],
-    computed: {
+    computed: mapGetters({
+      products: 'lakeList'
+    }),
+    methods: mapActions([
+      'getLakeList'
+    ]),
+    mounted () {
+      this.$store.dispatch('getLakeList')
     }
   }
 </script>
