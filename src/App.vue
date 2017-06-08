@@ -1,8 +1,8 @@
 <template>
-  <section class="app">
+  <div class='app'>
     <header-bar />
     <router-view />
-  </section>
+  </div>
 </template>
 
 <script>
@@ -13,3 +13,23 @@
     }
   }
 </script>
+
+<style lang='scss'>
+  @import url('https://fonts.googleapis.com/css?family=Titillium+Web:300,400,700,600');
+
+  body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    font-family: 'Titillium Web';
+  }
+</style>
+
+<style lang='scss' scoped>
+  .app {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+  }
+</style>
