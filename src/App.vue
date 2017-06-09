@@ -2,14 +2,17 @@
   <div class='app'>
     <header-bar />
     <router-view />
+    <notification />
   </div>
 </template>
 
 <script>
   import HeaderBar from './components/Header.vue'
+  import Notification from './components/Notification.vue'
   export default {
     components: {
-      'header-bar': HeaderBar
+      'header-bar': HeaderBar,
+      'notification': Notification
     }
   }
 </script>

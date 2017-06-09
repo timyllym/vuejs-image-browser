@@ -70,6 +70,7 @@
       a {
         text-decoration: none;
         color: $header-bar-text-color;
+        cursor: pointer;
       }
     }
   }

@@ -14,6 +14,8 @@ const LAKE_LIST_FETCH_SUCCESS = 'LAKE_LIST_FETCH_SUCCESS'
 const LAKE_LIST_FETCH_FAILURE = 'LAKE_LIST_FETCH_FAILURE'
 const OPEN_IMAGE = 'OPEN_IMAGE'
 const CLOSE_IMAGE = 'CLOSE_IMAGE'
+const OPEN_NOTIFICATION = 'OPEN_NOTIFICATION'
+const CLOSE_NOTIFICATION = 'CLOSE_NOTIFICATION'
 
 // Initial state
 const state = {
@@ -21,6 +23,7 @@ const state = {
   currentImage: '',
   imageList: [],
   error: '',
+  notificationOpen: false,
   fetching: false
 }
 
@@ -35,7 +38,9 @@ const getters = {
       }
     }
     return ''
-  }
+  },
+  error: state => state.error,
+  notificationOpen: state => state.notificationOpen
 }
 
 // Actions
@@ -85,6 +90,12 @@ const actions = {
   closeImage ({ commit, state }) {
     commit(CLOSE_IMAGE)
     router.push(`/${state.currentView}`)
+  },
+  openNotification ({ commit }) {
+    commit(OPEN_NOTIFICATION)
+  },
+  closeNotification ({ commit }) {
+    commit(CLOSE_NOTIFICATION)
   }
 }
 
@@ -123,6 +134,12 @@ const mutations = {
   },
   [CLOSE_IMAGE] (state) {
     state.currentImage = ''
+  },
+  [OPEN_NOTIFICATION] (state) {
+    state.notificationOpen = true
+  },
+  [CLOSE_NOTIFICATION] (state) {
+    state.notificationOpen = false
   }
 }
 
