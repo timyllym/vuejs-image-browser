@@ -9,6 +9,9 @@
         <router-link to='/lakes'>Lakes</router-link>
       </div>
     </div>
+    <div class='info'>
+      <a href='https://unsplash.com/'>https://unsplash.com/</a>
+    </div>
   </div>
 </template>
 
@@ -55,6 +58,18 @@
             outline: none;
           }
         }
+      }
+    }
+
+    .info {
+      flex: 1 1 auto;
+      display: flex;
+      justify-content: flex-end;
+      margin-right: 20px;
+
+      a {
+        text-decoration: none;
+        color: $header-bar-text-color;
       }
     }
   }

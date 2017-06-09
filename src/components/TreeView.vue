@@ -1,5 +1,9 @@
 <template>
-  <div>Trees</div>
+  <div class='image-group'>
+    <div class='image-container' v-for='image in images'>
+      <img :src='image.url' />
+    </div>
+  </div>
 </template>
 
 <script>
@@ -7,7 +11,7 @@
 
   export default {
     computed: mapGetters({
-      products: 'treeList'
+      images: 'treeList'
     }),
     methods: mapActions([
       'getTreeList'

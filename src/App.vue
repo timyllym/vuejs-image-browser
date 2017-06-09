@@ -24,6 +24,25 @@
     flex-direction: row;
     font-family: 'Titillium Web';
   }
+
+  .image-group {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+
+  .image-container {
+    width: 200px;
+    height: 150px;
+    margin: 20px 0 0 20px;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
 </style>
 
 <style lang='scss' scoped>
