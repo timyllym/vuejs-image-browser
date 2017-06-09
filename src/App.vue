@@ -25,22 +25,24 @@
     font-family: 'Titillium Web';
   }
 
-  .image-group {
+  .thumbnail-group {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     margin-bottom: 20px;
   }
 
-  .image-container {
+  .thumbnail {
     width: 200px;
     height: 150px;
     margin: 20px 0 0 20px;
+    cursor: pointer;
 
     img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      border: 0;
     }
   }
 </style>

@@ -10,7 +10,7 @@
       </div>
     </div>
     <div class='info'>
-      <a href='https://unsplash.com/'>https://unsplash.com/</a>
+      <a href='https://github.com/timyllym/vuejs-image-browser'>https://github.com/timyllym/vuejs-image-browser</a>
     </div>
   </div>
 </template>

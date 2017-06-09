@@ -1,8 +1,11 @@
 <template>
-  <div class='image-group'>
-    <div class='image-container' v-for='image in images'>
-      <img :src='image.url' />
+  <div>
+    <div class='thumbnail-group'>
+      <div class='thumbnail' v-for='image in images'>
+        <img :src='image.url' @click='openImage(image)' />
+      </div>
     </div>
+    <router-view />
   </div>
 </template>
 
@@ -11,13 +14,14 @@
 
   export default {
     computed: mapGetters({
-      images: 'treeList'
+      images: 'imageList'
     }),
     methods: mapActions([
-      'getTreeList'
+      'getTreeList',
+      'openImage'
     ]),
     mounted () {
-      this.$store.dispatch('getTreeList')
+      this.getTreeList()
     }
   }
 </script>
