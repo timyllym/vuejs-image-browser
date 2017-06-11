@@ -50,7 +50,8 @@ const actions = {
     api.fetchTreeList()
       .then((response) => {
         if (response.status !== 200) {
-          commit(TREE_LIST_FETCH_FAILURE, { 'error': 'Error: ' + response.statusText })
+          commit(TREE_LIST_FETCH_FAILURE, { 'error': response.statusText })
+          commit(OPEN_NOTIFICATION)
         } else {
           return response.json()
             .then((result) => {
@@ -58,9 +59,14 @@ const actions = {
                 commit(TREE_LIST_FETCH_SUCCESS, { trees: result.images })
               } else {
                 commit(TREE_LIST_FETCH_FAILURE, { 'error': 'No images' })
+                commit(OPEN_NOTIFICATION)
               }
             });
         }
+      })
+      .catch((error) => {
+          commit(TREE_LIST_FETCH_FAILURE, { 'error': String(error) })
+          commit(OPEN_NOTIFICATION)
       })
   },
   getLakeList ({ commit }) {
@@ -68,7 +74,8 @@ const actions = {
     api.fetchLakeList()
       .then((response) => {
         if (response.status !== 200) {
-          commit(LAKE_LIST_FETCH_FAILURE, { 'error': 'Error: ' + response.statusText })
+          commit(LAKE_LIST_FETCH_FAILURE, { 'error': response.statusText })
+          commit(OPEN_NOTIFICATION)
         } else {
           return response.json()
             .then((result) => {
@@ -76,9 +83,14 @@ const actions = {
                 commit(LAKE_LIST_FETCH_SUCCESS, { lakes: result.images })
               } else {
                 commit(LAKE_LIST_FETCH_FAILURE, { 'error': 'No images' })
+                commit(OPEN_NOTIFICATION)
               }
             });
         }
+      })
+      .catch((error) => {
+          commit(LAKE_LIST_FETCH_FAILURE, { 'error': String(error) })
+          commit(OPEN_NOTIFICATION)
       })
   },
   openImage ({ commit, state }, image) {
