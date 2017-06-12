@@ -21,7 +21,8 @@ const CLOSE_NOTIFICATION = 'CLOSE_NOTIFICATION'
 const state = {
   currentView: '',
   currentImage: '',
-  imageList: [],
+  treeList: [],
+  lakeList: [],
   error: '',
   notificationOpen: false,
   fetching: false
@@ -29,12 +30,14 @@ const state = {
 
 // Getters
 const getters = {
-  imageList: state => state.imageList,
+  treeList: state => state.treeList,
+  lakeList: state => state.lakeList,
   currentImage: state => state.route.params.id,
   currentImageURL: state => {
-    if (state.imageList.length > 0 && state.route.params.id) {
-      if (state.imageList.find(item => String(item.id) === state.route.params.id)) {
-        return state.imageList.find(item => String(item.id) === state.route.params.id).url
+    let imageList = state.currentView === 'trees' ? state.treeList : state.lakeList
+    if (imageList.length > 0 && state.route.params.id) {
+      if (imageList.find(item => String(item.id) === state.route.params.id)) {
+        return imageList.find(item => String(item.id) === state.route.params.id).url
       }
     }
     return ''
@@ -114,12 +117,12 @@ const actions = {
 // Mutations
 const mutations = {
   [TREE_LIST_FETCH_REQUEST] (state, { fetching }) {
-    state.imageList = []
+    state.treeList = []
     state.fetching = fetching
     state.currentView = state.route.path.split('/')[1]
   },
   [TREE_LIST_FETCH_SUCCESS] (state, { trees }) {
-    state.imageList = trees
+    state.treeList = trees
     state.fetching = false
     state.currentImage = state.route.params.id
   },
@@ -128,12 +131,12 @@ const mutations = {
     state.fetching = false
   },
   [LAKE_LIST_FETCH_REQUEST] (state, { fetching }) {
-    state.imageList = []
+    state.lakeList = []
     state.fetching = fetching
     state.currentView = state.route.path.split('/')[1]
   },
   [LAKE_LIST_FETCH_SUCCESS] (state, { lakes }) {
-    state.imageList = lakes
+    state.lakeList = lakes
     state.fetching = false
     state.currentImage = state.route.params.id
   },

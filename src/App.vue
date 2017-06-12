@@ -55,5 +55,6 @@
     display: flex;
     flex-direction: column;
     flex: 1 1 auto;
+    width: 100%;
   }
 </style>

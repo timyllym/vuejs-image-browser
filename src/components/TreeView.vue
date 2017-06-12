@@ -19,14 +19,16 @@
       'spinner': Spinner
     },
     computed: mapGetters({
-      images: 'imageList'
+      images: 'treeList'
     }),
     methods: mapActions([
       'getTreeList',
       'openImage'
     ]),
     mounted () {
-      this.getTreeList()
+      if (this.images.length === 0) {
+        this.getTreeList()
+      }
     }
   }
 </script>

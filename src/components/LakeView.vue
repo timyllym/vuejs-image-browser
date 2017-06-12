@@ -19,14 +19,16 @@
       'spinner': Spinner
     },
     computed: mapGetters({
-      images: 'imageList'
+      images: 'lakeList'
     }),
     methods: mapActions([
       'getLakeList',
       'openImage'
     ]),
     mounted () {
-      this.getLakeList()
+      if (this.images.length === 0) {
+        this.getLakeList()
+      }
     }
   }
 </script>
