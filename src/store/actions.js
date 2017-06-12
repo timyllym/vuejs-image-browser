@@ -4,53 +4,61 @@ import * as types from './mutationTypes'
 
 // Actions
 const actions = {
-  getTreeList ({ commit }) {
-    commit(types.TREE_LIST_FETCH_REQUEST, { fetching: true })
-    api.fetchTreeList()
-      .then((response) => {
-        if (response.status !== 200) {
-          commit(types.TREE_LIST_FETCH_FAILURE, { 'error': response.statusText })
-          commit(types.OPEN_NOTIFICATION)
-        } else {
-          return response.json()
-            .then((result) => {
-              if (result.images) {
-                commit(types.TREE_LIST_FETCH_SUCCESS, { trees: result.images })
-              } else {
-                commit(types.TREE_LIST_FETCH_FAILURE, { 'error': 'No images' })
-                commit(types.OPEN_NOTIFICATION)
-              }
-            });
-        }
-      })
-      .catch((error) => {
-          commit(types.TREE_LIST_FETCH_FAILURE, { 'error': String(error) })
-          commit(types.OPEN_NOTIFICATION)
-      })
+  getTreeList ({ commit, state }) {
+    if (state.treeList.length === 0) {
+        commit(types.TREE_LIST_FETCH_REQUEST, { fetching: true })
+        api.fetchTreeList()
+          .then((response) => {
+            if (response.status !== 200) {
+              commit(types.TREE_LIST_FETCH_FAILURE, { 'error': response.statusText })
+              commit(types.OPEN_NOTIFICATION)
+            } else {
+              return response.json()
+                .then((result) => {
+                  if (result.images) {
+                    commit(types.TREE_LIST_FETCH_SUCCESS, { trees: result.images })
+                  } else {
+                    commit(types.TREE_LIST_FETCH_FAILURE, { 'error': 'No images' })
+                    commit(types.OPEN_NOTIFICATION)
+                  }
+                });
+            }
+          })
+          .catch((error) => {
+              commit(types.TREE_LIST_FETCH_FAILURE, { 'error': String(error) })
+              commit(types.OPEN_NOTIFICATION)
+          })
+      } else {
+          commit(types.TREE_LIST_FOUND_EXISTING)
+      }
   },
-  getLakeList ({ commit }) {
-    commit(types.LAKE_LIST_FETCH_REQUEST, { fetching: true })
-    api.fetchLakeList()
-      .then((response) => {
-        if (response.status !== 200) {
-          commit(types.LAKE_LIST_FETCH_FAILURE, { 'error': response.statusText })
-          commit(types.OPEN_NOTIFICATION)
-        } else {
-          return response.json()
-            .then((result) => {
-              if (result.images) {
-                commit(types.LAKE_LIST_FETCH_SUCCESS, { lakes: result.images })
-              } else {
-                commit(types.LAKE_LIST_FETCH_FAILURE, { 'error': 'No images' })
-                commit(types.OPEN_NOTIFICATION)
-              }
-            });
-        }
-      })
-      .catch((error) => {
-          commit(types.LAKE_LIST_FETCH_FAILURE, { 'error': String(error) })
-          commit(types.OPEN_NOTIFICATION)
-      })
+  getLakeList ({ commit, state }) {
+    if (state.lakeList.length === 0) {
+        commit(types.LAKE_LIST_FETCH_REQUEST, { fetching: true })
+        api.fetchLakeList()
+          .then((response) => {
+            if (response.status !== 200) {
+              commit(types.LAKE_LIST_FETCH_FAILURE, { 'error': response.statusText })
+              commit(types.OPEN_NOTIFICATION)
+            } else {
+              return response.json()
+                .then((result) => {
+                  if (result.images) {
+                    commit(types.LAKE_LIST_FETCH_SUCCESS, { lakes: result.images })
+                  } else {
+                    commit(types.LAKE_LIST_FETCH_FAILURE, { 'error': 'No images' })
+                    commit(types.OPEN_NOTIFICATION)
+                  }
+                });
+            }
+          })
+          .catch((error) => {
+              commit(types.LAKE_LIST_FETCH_FAILURE, { 'error': String(error) })
+              commit(types.OPEN_NOTIFICATION)
+          })
+      } else {
+          commit(types.LAKE_LIST_FOUND_EXISTING)
+      }
   },
   openImage ({ commit, state }, image) {
     commit(types.OPEN_IMAGE, {

@@ -6,7 +6,9 @@
         <img :src='image.url' @click='openImage(image)' />
       </div>
     </div>
-    <router-view />
+    <transition name='open-image'>
+      <router-view />
+    </transition>
   </div>
 </template>
 
@@ -26,9 +28,7 @@
       'openImage'
     ]),
     mounted () {
-      if (this.images.length === 0) {
-        this.getLakeList()
-      }
+      this.getLakeList()
     }
   }
 </script>
@@ -37,5 +37,13 @@
   .spinner-box {
     margin-left: 20px;
     margin-top: 10px;
+  }
+
+  .open-image-enter-active, .open-image-leave-active {
+    transition: all .2s ease-out;
+  }
+  .open-image-enter, .open-image-leave-to {
+    transform: scale(0.9, 0.9);
+    opacity: 0;
   }
 </style>
